@@ -14,7 +14,7 @@
         <a href="{% url 'logout' %}">Выйти</a>
     </div>
     <script>
-        let socket = new WebSocket('ws://0.0.0.0:8000/ws/num/');
+        let socket = new WebSocket('ws://84.201.175.91:8000/ws/num/');
         socket.onmessage = function(event){
             let data = event.data;
             console.log(data);

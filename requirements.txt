@@ -1,10 +1,7 @@
 django
 channels
 psycopg2-binary==2.8.5
-gunicorn==20.0.4
-uvicorn
 apscheduler
 channels-redis
 social-auth-app-django
 python-dotenv
-hypercorn
