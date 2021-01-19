@@ -4,4 +4,5 @@ from number import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+
 ]

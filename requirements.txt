@@ -5,3 +5,4 @@ gunicorn==20.0.4
 apscheduler
 channels-redis
 django-github-oauth
+social-auth-app-django

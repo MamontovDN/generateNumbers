@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'channels',
-    'django_github_oauth',
     'number.apps.NumberConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -73,16 +76,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 ASGI_APPLICATION = 'mysite.asgi.application'
 
-GITHUB_OAUTH_CLIENT_ID =
-GITHUB_OAUTH_SECRET =
-GITHUB_OAUTH_CALLBACK_URL = 'http://127.0.0.1:8000/'
-GITHUB_OAUTH_SCOPES = []
 
-AUTH_USER_MODEL = 'django_github_oauth.User'
-AUTHENTICATION_BACKENDS = ('django_passwordless_auth.backend.PasswordlessAuthBackend',)
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
+LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
+SOCIAL_AUTH_GITHUB_KEY = 'd8951957d2c540658222'
+SOCIAL_AUTH_GITHUB_SECRET = '05da5afd5dd47e5f9930811d4c27032d778f19cd'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -102,6 +100,13 @@ CHANNEL_LAYERS = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

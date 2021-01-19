@@ -7,6 +7,7 @@
 <body>
 {% if user.is_authenticated  %}
     <h1 id="num">loading numbers ...</h1>
+    <a href="{% url 'logout' %}">Выйти</a>
     <script>
         let socket = new WebSocket('ws://127.0.0.1:8000/ws/num/');
         socket.onmessage = function(event){
@@ -16,7 +17,8 @@
         }
     </script>
 {% else %}
-    <a href="{% url 'github_oauth:login' %}">login</a>
+
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
     {{ user }}
 {% endif %}
 
