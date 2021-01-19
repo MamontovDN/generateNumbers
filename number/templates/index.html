@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "index.css" %}">
 </head>
 <body>
 {% if user.is_authenticated  %}
-    <h1 id="num">loading numbers ...</h1>
-    <a href="{% url 'logout' %}">Выйти</a>
+    <div>
+        <h1>{{ user.user_name }}</h1>
+        <h1 id="num">loading numbers ...</h1>
+        <a href="{% url 'logout' %}">Выйти</a>
+    </div>
     <script>
-        let socket = new WebSocket('ws://127.0.0.1:8000/ws/num/');
+        let socket = new WebSocket('ws://0.0.0.0:8000/ws/num/');
         socket.onmessage = function(event){
             let data = event.data;
             console.log(data);
@@ -17,9 +22,9 @@
         }
     </script>
 {% else %}
-
-    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-    {{ user }}
+    <div>
+        <a href="{% url 'social:begin' 'github' %}">Зайти через GitHub</a><br>
+    </div>
 {% endif %}
 
 </body>
