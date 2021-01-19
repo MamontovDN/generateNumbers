@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+{% if user.is_authenticated  %}
     <h1 id="num">1</h1>
     <script>
         let socket = new WebSocket('ws://127.0.0.1:8000/ws/num/');
@@ -14,5 +15,9 @@
             document.querySelector('#num').innerText = data;
         }
     </script>
+{% else %}
+    <a href="#">login</a>
+{% endif %}
+
 </body>
 </html>
