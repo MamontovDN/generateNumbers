@@ -10,7 +10,6 @@ channel_layer = get_channel_layer()
 
 def job():
     n = random.randint(1, 10)
-    print(n)
     async_to_sync(channel_layer.group_send)('gr_num', {'type': 'send_num',
                                                        'message': str(n)})
 

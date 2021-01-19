@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('github-oauth/', include('django_github_oauth.urls')),
     path('', include('number.urls'))
 ]
