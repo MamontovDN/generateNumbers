@@ -7,14 +7,22 @@
     <link rel="stylesheet" href="{% static "index.css" %}">
 </head>
 <body>
-{% if user.is_authenticated  %}
+{% if user.is_authenticated %}
     <div>
-        <h1>{{ user.user_name }}</h1>
-        <h1 id="num">loading numbers ...</h1>
+        <h1>{{ user }}</h1>
+        <h1 id="num">...</h1>
         <a href="{% url 'logout' %}">Выйти</a>
     </div>
     <script>
-        let socket = new WebSocket('ws://84.201.175.91:8000/ws/num/');
+        let socket = new WebSocket('ws://' +
+            window.location.host +
+            ':8000/ws/num/'
+        );
+
+        socket.onopen = function(){
+            socket.send('');
+        }
+
         socket.onmessage = function(event){
             let data = event.data;
             console.log(data);
@@ -25,7 +33,7 @@
     <div>
         <a href="{% url 'social:begin' 'github' %}">Зайти через GitHub</a><br>
     </div>
-{% endif %}
 
+{% endif %}
 </body>
 </html>

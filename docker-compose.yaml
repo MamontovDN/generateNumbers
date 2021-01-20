@@ -12,7 +12,7 @@ services:
     env_file:
       - ./.env
   web:
-    build: .
+    image: mamontovdn/num:latest
     restart: always
     volumes:
       - static:/static
