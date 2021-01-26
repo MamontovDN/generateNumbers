@@ -10,7 +10,7 @@
 {% if user.is_authenticated %}
     <div>
         <h1>{{ user }}</h1>
-        <h1 id="num">...</h1>
+        <h1 id="num">{{num}}</h1>
         <a href="{% url 'logout' %}">Выйти</a>
     </div>
     <script>
